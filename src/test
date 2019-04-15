@@ -1,0 +1,13 @@
+#! /bin/sh
+ARGS_DEF_opt_char_flg="ab"
+ARGS_DEF_opt_char_val="cd"
+ARGS_DEF_opt_word_flg="help"
+ARGS_DEF_opt_word_val="config"
+ARGS_DEF_arg_namelist="out_file in_
+ARGS_DEF_arg_num_must=1
+
+source ./shargs
+
+echo +++++
+set | grep ARGS_
+echo +++++

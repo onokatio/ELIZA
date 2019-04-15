@@ -1,0 +1,39 @@
+#!/bin/bash
+echo "起動中..."
+
+export yesno
+
+source ./functions
+clear
+if [ -e ./config.cfg ];then
+  echo -n
+else
+  ELIZA_F_firstsetting
+fi
+echov "情報を読み込んでいます。しばらくお待ちください..."
+ELIZA_P_NAME=$(grep 'NAME : ' ./profile.ELIZA | cut -c8-)
+ELIZA_P_BIRTH=$(grep 'BIRTHDAY : ' ./profile.ELIZA)
+ELIZA_TODAY=$(date|cut -c8-20)
+ELIZA_LOOP=1
+clear
+echov "${ELIZA_P_NAME}さんこんにちは。"
+echov "今日は$ELIZA_TODAYです。"
+clear
+while [$ELIZA_LOOP ]
+do
+  clear
+  echo "USER : ${ELIZA_P_NAME}  DATE : ${ELIZA_TODAY}"
+  echo
+  echo
+  echov "命令をどうぞ"
+  echo -n "[Please speale] >> "
+  read do
+  if [ "$do" = "fin" ] || [ "$do" = "終了" ] ;then
+    ELIZA_F_yesno "終了しますか"
+    if [ "$yesno" = "y" ];then
+      echov "終了します"
+      clear
+      exit 0
+    fi
+  fi
+done

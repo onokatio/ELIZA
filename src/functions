@@ -1,0 +1,33 @@
+#!/bin/bash
+function ELIZA_F_firstsetting {
+  echov "こんにちは。私の名前はイライザです。これからあなたのパーソナルアシスタントを努めさせていただきます。"
+  while [ "$yesno" != "y" ]
+  do
+    echov "あなたの名前を入力してください。"
+    echo -n " > "
+    read name
+    ELIZA_F_yesno " $nameさんですね。これでよろしいですか"
+  done
+  echo "NAME : $name" > ./profile.ELIZA
+  echov "記憶しました。"
+  yesno=n
+  clear
+  while [ "$yesno" != "y" ]
+  do
+    echov "次に、あなたの誕生日を教えてください"
+    echo -n "月 > "
+    read birthmonth
+    echo -n "日 > "
+    read birthday
+    ELIZA_F_yesno "$birthmonth月$birthday日うまれですね。これでよろしいですか"
+  done
+  echo "BIRTHDAY : $birthmonth/$birthday" >> ./profile.ELIZA
+  echov "記憶しました。"
+  clear
+}
+
+function ELIZA_F_yesno {
+echov "$*"
+echo -n " [ y/n ] > "
+read yesno
+}
